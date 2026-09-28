@@ -1,7 +1,9 @@
 # OnePath — Codemagic CI
 # Android: builds an installable debug APK.
 # iOS: builds for simulator (no signing needed) to validate the full iOS pipeline.
-# Installing on a real iPhone later requires an Apple Developer account + code signing.
+# iOS IPA: builds for real devices without signing -> sideload with Sideloadly
+#   using a free Apple ID (7-day refresh). Signed/App Store distribution later
+#   requires an Apple Developer account + code signing.
 workflows:
   android-debug:
     name: Android Debug APK
@@ -58,3 +60,40 @@ workflows:
             CODE_SIGNING_ALLOWED=NO
     artifacts:
       - build/Build/Products/Debug-iphonesimulator/App.app
+
+  ios-ipa:
+    name: iOS Device IPA (unsigned, for sideloading)
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    environment:
+      node: 20
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - name: Install dependencies
+        script: npm ci
+      - name: Add iOS platform
+        script: npx cap add ios
+      - name: Sync web assets
+        script: npx cap sync ios
+      - name: Install CocoaPods
+        script: |
+          cd ios/App
+          pod install
+      - name: Build for iOS device (no signing)
+        script: |
+          xcodebuild \
+            -workspace ios/App/App.xcworkspace \
+            -scheme App \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO
+      - name: Package unsigned IPA
+        script: |
+          rm -rf Payload OnePath-unsigned.ipa
+          mkdir -p Payload
+          cp -R "build/Build/Products/Release-iphoneos/App.app" Payload/
+          zip -r -y OnePath-unsigned.ipa Payload
+    artifacts:
+      - OnePath-unsigned.ipa
