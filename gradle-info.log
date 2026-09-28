@@ -1,0 +1,19 @@
+Initialized native services in: /root/.gradle/native
+Initialized jansi services in: /root/.gradle/native
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.11.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Starting process 'Gradle build daemon'. Working directory: /root/.gradle/daemon/8.11.1 Command: /home/hatch/workspace/java/jdk-17.0.11+9/bin/java --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.prefs/java.util.prefs=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.prefs/java.util.prefs=ALL-UNNAMED --add-opens=java.base/java.nio.charset=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens=java.xml/javax.xml.namespace=ALL-UNNAMED -Xmx1536m -Dfile.encoding=US-ASCII -Duser.country=US -Duser.language=en -Duser.variant -cp /home/hatch/.gradle/wrapper/dists/gradle-8.11.1-all/04e2ef4bd255dabde47af957ebc78570d5435ba310276cf267d8acde9fea167e/gradle-8.11.1/lib/gradle-daemon-main-8.11.1.jar -javaagent:/home/hatch/.gradle/wrapper/dists/gradle-8.11.1-all/04e2ef4bd255dabde47af957ebc78570d5435ba310276cf267d8acde9fea167e/gradle-8.11.1/lib/agents/gradle-instrumentation-agent-8.11.1.jar org.gradle.launcher.daemon.bootstrap.GradleDaemon 8.11.1
+Successfully started process 'Gradle build daemon'
+An attempt to start the daemon took 2.255 secs.
+Removing daemon from the registry due to communication failure. Daemon information: DaemonInfo{pid=8689, address=[62b76fbe-fa9e-40fb-b0ad-4bfe27d39026 port:46521, addresses:[/127.0.0.1]], state=Busy, lastBusy=1790560392911, context=DefaultDaemonContext[uid=699d9a58-bc70-46ff-9ed4-e39d4fb8285e,javaHome=/home/hatch/workspace/java/jdk-17.0.11+9,javaVersion=17,javaVendor=Eclipse Adoptium,daemonRegistryDir=/root/.gradle/daemon,pid=8689,idleTimeout=120000,priority=NORMAL,applyInstrumentationAgent=true,nativeServicesMode=ENABLED,daemonOpts=-Xmx1536m,-Dfile.encoding=US-ASCII,-Duser.country=US,-Duser.language=en,-Duser.variant]}
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Could not receive a message from the daemon.
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+EXIT:1
