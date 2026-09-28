@@ -1,0 +1,9 @@
+{
+  "android": {
+    "allowMixedContent": false
+  },
+  "appId": "app.onepath.game",
+  "appName": "OnePath",
+  "backgroundColor": "#0b0e1a",
+  "webDir": "www"
+}

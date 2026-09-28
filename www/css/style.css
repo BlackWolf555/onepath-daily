@@ -1,0 +1,74 @@
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; overscroll-behavior: none; }
+body {
+  background: #0b0e1a;
+  color: #eef1ff;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  display: flex; justify-content: center;
+  touch-action: none; user-select: none; -webkit-user-select: none;
+  overflow: hidden;
+}
+#app {
+  width: 100%; max-width: 480px; height: 100dvh;
+  display: flex; flex-direction: column; align-items: stretch;
+  padding: env(safe-area-inset-top) 12px env(safe-area-inset-bottom);
+}
+#hud {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 4px;
+}
+#game-title { font-size: 22px; font-weight: 800; letter-spacing: 0.5px;
+  background: linear-gradient(90deg, #7c5cff, #38e1ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+#puzzle-label { font-size: 12px; color: #8b93b8; margin-top: 2px; }
+.hud-right { display: flex; gap: 14px; align-items: center; font-size: 17px; font-weight: 700; }
+#streak { background: #1a2036; border-radius: 999px; padding: 5px 12px; font-size: 15px; }
+#timer { font-variant-numeric: tabular-nums; color: #aeb7dd; min-width: 52px; text-align: right; }
+
+#board-wrap { position: relative; width: 100%; aspect-ratio: 1 / 1; margin-top: 2px; }
+#board { width: 100%; height: 100%; display: block; border-radius: 18px;
+  background: #12162a; box-shadow: 0 8px 40px rgba(0,0,0,.45), inset 0 0 0 1px #232a4d; touch-action: none; }
+#hint-bar {
+  position: absolute; left: 0; right: 0; bottom: -30px; text-align: center;
+  font-size: 13px; color: #ff9d7a; min-height: 20px; pointer-events: none;
+  transition: opacity .25s; opacity: 0;
+}
+#hint-bar.show { opacity: 1; }
+
+#progress-wrap { height: 6px; background: #1a2036; border-radius: 999px; margin: 34px 4px 0; overflow: hidden; }
+#progress-fill { height: 100%; width: 0%; border-radius: 999px;
+  background: linear-gradient(90deg, #7c5cff, #38e1ff); transition: width .15s ease-out; }
+
+#controls { display: flex; gap: 10px; padding: 12px 0 4px; }
+.btn {
+  flex: 1; border: none; border-radius: 14px; padding: 13px 0;
+  font-size: 16px; font-weight: 700; color: #eef1ff; background: #1a2036;
+  cursor: pointer; transition: transform .08s, background .15s;
+}
+.btn:active { transform: scale(.96); }
+.btn.primary { background: linear-gradient(135deg, #7c5cff, #4f8dff); box-shadow: 0 4px 18px rgba(124,92,255,.45); }
+.btn.big { padding: 15px 0; margin-top: 10px; width: 100%; }
+.btn.hidden, .hidden { display: none !important; }
+
+.overlay {
+  position: fixed; inset: 0; z-index: 10;
+  background: rgba(5,7,16,.82); backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center; padding: 24px;
+}
+.card {
+  width: 100%; max-width: 340px; background: #141a33; border-radius: 22px;
+  padding: 28px 24px; text-align: center; border: 1px solid #2a3560;
+  box-shadow: 0 20px 60px rgba(0,0,0,.6);
+  max-height: 92dvh; overflow-y: auto;
+}
+.card h1 { font-size: 34px; margin-bottom: 10px; }
+.tagline { color: #aeb7dd; line-height: 1.7; margin-bottom: 14px; font-size: 15px; }
+.tagline b { color: #fff; }
+#start-streak { margin-top: 16px; color: #8b93b8; font-size: 14px; }
+#win-stats { font-size: 16px; color: #aeb7dd; line-height: 1.8; margin-bottom: 8px; }
+#win-stats b { color: #fff; font-size: 20px; }
+.emoji-grid {
+  font-size: 13px; line-height: 1.5; background: #0b0e1a; border-radius: 12px;
+  padding: 12px; margin: 6px 0 4px; white-space: pre; display: inline-block;
+  font-family: "Apple Color Emoji","Segoe UI Emoji",sans-serif;
+}
+#share-note { margin-top: 10px; font-size: 13px; color: #7ee2a8; min-height: 18px; }

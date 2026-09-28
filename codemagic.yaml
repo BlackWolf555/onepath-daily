@@ -1,0 +1,56 @@
+# OnePath — Codemagic CI
+# Android: builds an installable debug APK.
+# iOS: builds for simulator (no signing needed) to validate the full iOS pipeline.
+# Installing on a real iPhone later requires an Apple Developer account + code signing.
+workflows:
+  android-debug:
+    name: Android Debug APK
+    max_build_duration: 60
+    instance_type: linux_x2
+    environment:
+      node: 20
+      java: 17
+    scripts:
+      - name: Install dependencies
+        script: npm ci
+      - name: Add Android platform
+        script: npx cap add android
+      - name: Sync web assets
+        script: npx cap sync android
+      - name: Build debug APK
+        script: |
+          cd android
+          ./gradlew assembleDebug --no-daemon
+    artifacts:
+      - android/app/build/outputs/apk/debug/app-debug.apk
+
+  ios-simulator:
+    name: iOS Simulator Build
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    environment:
+      node: 20
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - name: Install dependencies
+        script: npm ci
+      - name: Add iOS platform
+        script: npx cap add ios
+      - name: Sync web assets
+        script: npx cap sync ios
+      - name: Install CocoaPods
+        script: |
+          cd ios/App
+          pod install
+      - name: Build for iOS simulator
+        script: |
+          xcodebuild \
+            -workspace ios/App/App.xcworkspace \
+            -scheme App \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO
+    artifacts:
+      - build/Build/Products/Debug-iphonesimulator/App.app

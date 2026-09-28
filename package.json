@@ -1,0 +1,1 @@
+{"dependencies":{"@capacitor/android":"^7.4.0","@capacitor/core":"^7.4.0","@capacitor/ios":"^7.4.0"},"description":"OnePath — daily path-drawing puzzle game (MVP)","devDependencies":{"@capacitor/cli":"^7.4.0"},"name":"onepath","scripts":{"sync":"cap sync"},"version":"0.1.0"}
